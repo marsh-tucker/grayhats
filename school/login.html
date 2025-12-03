@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Mom and Pop's Pizza - Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="login-page">
+  <div class="login-container">
+    <h1>Login</h1>
+
+    <!-- Username field -->
+    <label for="username">Username</label>
+    <input type="text" id="username">
+
+    <!-- Password field -->
+    <label for="password">Password</label>
+    <input type="password" id="password">
+
+    <!-- Buttons -->
+    <button onclick="createAccount()">Create Account</button>
+    <button onclick="login()">Login</button>
+    <button onclick="guest()">Continue As Guest</button>
+
+    <!-- Message area -->
+    <div id="message"></div>
+  </div>
+
+  <script>
+    // Save account in localStorage
+// Save account in localStorage with password requirements
+function createAccount() {
+  const user = document.getElementById('username').value.trim();
+  const pass = document.getElementById('password').value.trim();
+
+  // Password rules
+  const minLength = /.{8,}/;               // at least 8 characters
+  const hasNumber = /[0-9]/;               // at least one number
+  const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/; // at least one special character
+
+  if (user === "" || pass === "") {
+    showMessage("Username and password cannot be empty!", "red");
+    return;
+  }
+
+  if (!minLength.test(pass)) {
+    showMessage("Password must be at least 8 characters long!", "red");
+    return;
+  }
+
+  if (!hasNumber.test(pass)) {
+    showMessage("Password must contain at least one number!", "red");
+    return;
+  }
+
+  if (!hasSpecial.test(pass)) {
+    showMessage("Password must contain at least one special character!", "red");
+    return;
+  }
+
+  // If all rules passed — success
+  localStorage.setItem("savedUsername", user);
+  localStorage.setItem("savedPassword", pass);
+  showMessage("Account created successfully!", "green");
+}
+
+
+    // Validate login
+    function login() {
+      const user = document.getElementById('username').value.trim();
+      const pass = document.getElementById('password').value.trim();
+
+      const savedUser = localStorage.getItem("savedUsername");
+      const savedPass = localStorage.getItem("savedPassword");
+
+      if (!savedUser || !savedPass) {
+        showMessage("No account exists. Please create one first!", "red");
+      } else if (user !== savedUser) {
+        showMessage("Wrong username!", "red");
+      } else if (pass !== savedPass) {
+        showMessage("Wrong password!", "red");
+      } else {
+        showMessage("Login successful! Welcome " + savedUser, "green");
+        window.location.href = "menu.html";
+      }
+    }
+
+    // Guest login
+    function guest() {
+      showMessage("Continuing as Guest...", "blue");
+      window.location.href = "menu.html";
+    }
+
+    // Show messages nice
+    function showMessage(msg, color) {
+      const messageDiv = document.getElementById('message');
+      messageDiv.textContent = msg;
+      messageDiv.style.color = color;
+      messageDiv.style.marginTop = "10px";
+      messageDiv.style.fontWeight = "bold";
+      messageDiv.style.textAlign = "center";
+    }
+  </script>
+</body>
+</html>

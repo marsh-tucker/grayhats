@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Mom and Pop's Pizza - Menu</title>
+  <!-- style.css is in the same folder as this file -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="menu-page">
+
+<header class="menu-header">
+  <h1>Menu</h1>
+
+  <!-- hidden div that displays a preview of the cart on the ordering screen-->
+ <div id="cart-preview" class="cart-preview hidden">
+  <h3>Your Cart</h3>
+  <ul id="cart-items"></ul>
+  <p class="cart-total">Total: $<span id="cart-total">0.00</span></p>
+  <button onclick="goToCheckout()" class="checkout-btn">Checkout →</button>
+  <button onclick="togglePreview()" class="checkout-btn">Close</button>
+</div>
+
+
+  <!-- Cart icon that shows count -->
+  <div class="cart-display">
+    🛒 <span id="cart-count">0</span>
+  </div>
+</header>
+
+<main class="menu-main">
+
+  <!-- CATEGORY SELECTOR -->
+  <section class="category-grid">
+    <a href="#pizzas" class="category-card">
+      <div class="category-image category-pizza"></div>
+      <h2>Pizzas</h2>
+    </a>
+
+    <a href="#drinks" class="category-card">
+      <div class="category-image category-drinks"></div>
+      <h2>Drinks</h2>
+    </a>
+
+    <a href="#sides" class="category-card">
+      <div class="category-image category-sides"></div>
+      <h2>Sides</h2>
+    </a>
+  </section>
+
+  <!-- PIZZAS SECTION -->
+  <section id="pizzas" class="menu-section">
+    <h2>Pizzas</h2>
+
+    <div class="item-grid">
+
+      <article class="item-card">
+        <h3>Classic Pepperoni</h3>
+        <p>Hand-tossed crust, red sauce, mozzarella, crispy pepperoni.</p>
+        <p class="price">$12.99</p>
+
+        <div class="qty-controls">
+          <button class="qty-minus">-</button>
+          <span class="qty-value">0</span>
+          <button class="qty-plus">+</button>
+        </div>
+      </article>
+
+      <article class="item-card">
+        <h3>Cheese Lover</h3>
+        <p>Extra mozzarella, provolone, and parmesan.</p>
+        <p class="price">$11.49</p>
+
+        <div class="qty-controls">
+          <button class="qty-minus">-</button>
+          <span class="qty-value">0</span>
+          <button class="qty-plus">+</button>
+        </div>
+      </article>
+
+      <article class="item-card">
+        <h3>Veggie Supreme</h3>
+        <p>Bell peppers, onions, mushrooms, olives, tomatoes.</p>
+        <p class="price">$12.49</p>
+
+        <div class="qty-controls">
+          <button class="qty-minus">-</button>
+          <span class="qty-value">0</span>
+          <button class="qty-plus">+</button>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- DRINKS SECTION -->
+  <section id="drinks" class="menu-section">
+    <h2>Drinks</h2>
+
+    <div class="item-grid">
+
+      <article class="item-card">
+        <h3>Soda</h3>
+        <p>Coke, Diet Coke, or Sprite.</p>
+        <p class="price">$2.49</p>
+
+        <div class="qty-controls">
+          <button class="qty-minus">-</button>
+          <span class="qty-value">0</span>
+          <button class="qty-plus">+</button>
+        </div>
+      </article>
+
+      <article class="item-card">
+        <h3>Sweet Tea</h3>
+        <p>Fresh brewed, ice cold.</p>
+        <p class="price">$2.29</p>
+
+        <div class="qty-controls">
+          <button class="qty-minus">-</button>
+          <span class="qty-value">0</span>
+          <button class="qty-plus">+</button>
+        </div>
+      </article>
+
+      <article class="item-card">
+        <h3>Bottled Water</h3>
+        <p>Spring water.</p>
+        <p class="price">$1.49</p>
+
+        <div class="qty-controls">
+          <button class="qty-minus">-</button>
+          <span class="qty-value">0</span>
+          <button class="qty-plus">+</button>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- SIDES SECTION -->
+  <section id="sides" class="menu-section">
+    <h2>Sides</h2>
+
+    <div class="item-grid">
+
+      <article class="item-card">
+        <h3>Garlic Breadsticks</h3>
+        <p>Warm and buttery.</p>
+        <p class="price">$4.99</p>
+
+        <div class="qty-controls">
+          <button class="qty-minus">-</button>
+          <span class="qty-value">0</span>
+          <button class="qty-plus">+</button>
+        </div>
+      </article>
+
+      <article class="item-card">
+        <h3>Wings (6pc)</h3>
+        <p>Mild, hot, or BBQ.</p>
+        <p class="price">$7.99</p>
+
+        <div class="qty-controls">
+          <button class="qty-minus">-</button>
+          <span class="qty-value">0</span>
+          <button class="qty-plus">+</button>
+        </div>
+      </article>
+
+      <article class="item-card">
+        <h3>Chocolate Lava Cake</h3>
+        <p>Rich warm chocolate.</p>
+        <p class="price">$3.99</p>
+
+        <div class="qty-controls">
+          <button class="qty-minus">-</button>
+          <span class="qty-value">0</span>
+          <button class="qty-plus">+</button>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <div class="done-container">
+   <button class="done-button">I'm Hungry</button>
+
+  </div>
+
+</main>
+
+<!-- menu.js is in the same folder as this file -->
+<script src="menu.js"></script>
+
+</body>
+</html>

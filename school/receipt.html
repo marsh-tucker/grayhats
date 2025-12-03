@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Mom and Pop's Pizza - Receipt</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="receipt-page">
+
+  <div class="receipt-container">
+
+    <!-- CHECKOUT SCREEN (shown first) -->
+    <div id="checkout-screen">
+      <h1>Checkout</h1>
+
+      <!-- This will be filled from the cart in localStorage -->
+      <div id="checkout-items">
+        <!-- JS will inject:
+             <div class="receipt-line">
+               <span>Item xQty</span>
+               <span>$Price</span>
+             </div>
+        -->
+      </div>
+
+      <!-- JS will update this with the real total -->
+      <h2 id="checkout-total">Total: $0.00</h2>
+
+      <!-- Pay button: reveals the card input area -->
+      <button id="pay-button" onclick="showPaymentSection()">Pay</button>
+
+      <!-- Hidden until user clicks Pay -->
+      <div id="payment-section" style="display:none; margin-top:24px; text-align:left;">
+
+        <h3>Payment Details</h3>
+
+        <div id="payment-errors" style="color:red; margin-bottom:10px;"></div>
+
+        <label for="card-name">Name on Card</label>
+        <input type="text" id="card-name">
+
+        <label for="card-number">Card Number</label>
+        <input type="text" id="card-number" maxlength="19">
+
+        <div style="display:flex; gap:10px;">
+          <div style="flex:1;">
+            <label for="card-exp">Expiry (MM/YY)</label>
+            <input type="text" id="card-exp" placeholder="MM/YY">
+          </div>
+          <div style="flex:1;">
+            <label for="card-cvv">CVV</label>
+            <input type="password" id="card-cvv" maxlength="4">
+          </div>
+        </div>
+
+        <button id="confirm-payment"
+                style="margin-top:18px; width:100%;"
+                onclick="validatePayment(event)">
+          Confirm Payment
+        </button>
+      </div>
+
+      <button onclick="location.href='index.html'" style="margin-top:24px;">
+        Return Home
+      </button>
+    </div>
+
+    <!-- FINAL RECEIPT (shown after successful payment) -->
+    <div id="final-receipt" style="display:none; text-align:left;">
+      <h2 style="text-align:center; margin-bottom:8px;">Mom and Pop's Pizzeria</h2>
+
+      <p style="text-align:center; margin:0;">
+        680 Arnston Rd ste. 2031, Marietta, GA 30060<br>
+        (770) 555-1212<br>
+        <span id="final-date-time"></span>
+      </p>
+
+      <hr style="margin:12px 0;">
+
+      <p><strong>Items:</strong></p>
+
+      <!-- JS will inject the final item list here -->
+      <div id="final-items"></div>
+
+      <br>
+
+      <div class="receipt-line">
+        <span>Tax (7%):</span>
+        <span id="final-tax">$0.00</span>
+      </div>
+
+      <div class="receipt-line">
+        <span>Delivery:</span>
+        <span id="final-delivery">$0.00 (FREE)</span>
+      </div>
+
+      <hr style="margin:12px 0;">
+
+      <div class="receipt-line" style="font-weight:bold;">
+        <span>TOTAL</span>
+        <span id="final-total">$0.00</span>
+      </div>
+
+      <br>
+
+      <p>
+        Payment: Visa •••• <span id="final-card-last4">0000</span><br>
+        Customer: <span id="final-customer">Customer Name</span><br><br>
+        Signature: __________________________
+      </p>
+
+      <button onclick="location.href='index.html'" style="margin-top:16px; width:100%;">
+        Return Home
+      </button>
+    </div>
+
+  </div>
+
+  <!-- This JS reads localStorage, fills checkout + final receipt, and validates payment -->
+  <script src="updatedreceipt.js"></script>
+
+</body>
+</html>
