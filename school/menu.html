@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
   <title>Mom and Pop's Pizza - Menu</title>
-  <!-- style.css is in the same folder as this file -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body class="menu-page">
@@ -12,18 +11,18 @@
   <h1>Menu</h1>
 
   <!-- hidden div that displays a preview of the cart on the ordering screen-->
- <div id="cart-preview" class="cart-preview hidden">
-  <h3>Your Cart</h3>
-  <ul id="cart-items"></ul>
-  <p class="cart-total">Total: $<span id="cart-total">0.00</span></p>
-  <button onclick="goToCheckout()" class="checkout-btn">Checkout →</button>
-  <button onclick="togglePreview()" class="checkout-btn">Close</button>
-</div>
 
+  <div id="cart-preview" class="cart-preview hidden">
+    <h3>Your Cart</h3>
+    <ul id="cart-items"></ul>
+    <p class="cart-total">Total: $<span id="cart-total">0.00</span></p>
+    <button id="preview-checkout" class="checkout-btn">Checkout →</button>
+    <button onclick="togglePreview()" class ="checkout-btn">Close</button>
+  </div>
 
-  <!-- Cart icon that shows count -->
+  <!-- Marsh please make this cart increment whenever we add items to it!-->
   <div class="cart-display">
-    🛒 <span id="cart-count">0</span>
+      🛒 <span id="cart-count">0</span>
   </div>
 </header>
 
@@ -31,6 +30,8 @@
 
   <!-- CATEGORY SELECTOR -->
   <section class="category-grid">
+
+    <!-- Marsh: make these clickable sections go to pizza/drinks/sides -->
     <a href="#pizzas" class="category-card">
       <div class="category-image category-pizza"></div>
       <h2>Pizzas</h2>
@@ -45,7 +46,9 @@
       <div class="category-image category-sides"></div>
       <h2>Sides</h2>
     </a>
+
   </section>
+
 
   <!-- PIZZAS SECTION -->
   <section id="pizzas" class="menu-section">
@@ -58,6 +61,7 @@
         <p>Hand-tossed crust, red sauce, mozzarella, crispy pepperoni.</p>
         <p class="price">$12.99</p>
 
+        <!-- Marsh: hook + / - buttons & qty to your JS -->
         <div class="qty-controls">
           <button class="qty-minus">-</button>
           <span class="qty-value">0</span>
@@ -91,6 +95,7 @@
 
     </div>
   </section>
+
 
   <!-- DRINKS SECTION -->
   <section id="drinks" class="menu-section">
@@ -137,6 +142,7 @@
     </div>
   </section>
 
+
   <!-- SIDES SECTION -->
   <section id="sides" class="menu-section">
     <h2>Sides</h2>
@@ -182,15 +188,14 @@
     </div>
   </section>
 
-  <div class="done-container">
-   <button class="done-button">I'm Hungry</button>
-
+  <div class = "done-container">
+    <button class = "done-button" onclick = "location.href = 'receipt.html'">I'm Hungry</button>
   </div>
 
 </main>
 
-<!-- menu.js is in the same folder as this file -->
-<script src="menu.js"></script>
 
 </body>
+
+<script src="../js/menu.js"></script>
 </html>
