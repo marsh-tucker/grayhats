@@ -7,7 +7,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const cartTotalDisplay = document.getElementById("cart-total");
     const doneButton = document.querySelector(".done-button");
 
-    let cart = [];
+    const initFlag = "cartInit";
+
+    if (!sessionStorage.getItem(initFlag)) {
+        localStorage.removeItem("savedCart");
+        localStorage.removeItem("cart");
+        sessionStorage.setItem(initFlag, "1");
+    }
+
+    function loadSavedCart() {
+        const saved = localStorage.getItem("savedCart") || localStorage.getItem("cart");
+        if (!saved) return [];
+        try {
+            return JSON.parse(saved) || [];
+        } catch (err) {
+            console.error("Error parsing saved cart:", err);
+            return [];
+        }
+    }
+
+    let cart = loadSavedCart();
 
     function updateCartDisplay() {
         const totalQty = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -47,21 +66,13 @@ document.addEventListener("DOMContentLoaded", () => {
         renderCartPreview();
     }
 
-    // Shared function to save cart & go to receipt
-    function goToCheckout() {
-        const cartJSON = JSON.stringify(cart);
-        localStorage.setItem("savedCart", cartJSON);
-        localStorage.setItem("cart", cartJSON); // compatibility
-        window.location.href = "receipt.html";
-    }
-
-    // Expose goToCheckout so the HTML onclick can call it
-    window.goToCheckout = goToCheckout;
-
-    // Render the cart when clicking the cart icon
+    //renders the cart by clicking the emoji
     if (cartIcon && cartPreview) {
         cartIcon.addEventListener("click", () => {
+            // 1. Update the cart contents first
             renderCartPreview();
+
+            // 2. Then, toggle the visibility using the class
             cartPreview.classList.toggle("hidden");
         });
     }
@@ -77,6 +88,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const qtySpan = card.querySelector(".qty-value");
 
         const getQty = () => parseInt(qtySpan.textContent, 10) || 0;
+
+        const existing = cart.find(item => item.name === name);
+        if (existing) {
+            qtySpan.textContent = existing.quantity;
+        }
 
         function updateCartItem(quantity) {
             const existing = cart.find(item => item.name === name);
@@ -106,17 +122,25 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // "I'm Hungry" button now also uses goToCheckout
+    // On load, sync totals/preview with any saved cart
+    syncCartUI();
+
     if (doneButton) {
-        doneButton.addEventListener("click", goToCheckout);
+        doneButton.addEventListener("click", () => {
+            const cartJSON = JSON.stringify(cart);
+            localStorage.setItem("savedCart", cartJSON);
+            localStorage.setItem("cart", cartJSON); // compatibility with earlier key
+            window.location.href = "receipt.html";
+        });
     }
+
 });
 
-// close button for the preview
 function togglePreview() {
     const previewElement = document.getElementById('cart-preview');
 
     if (previewElement) {
+        // This handles the simple visibility toggle for the "Close" button
         previewElement.classList.toggle('hidden');
     } else {
         console.error('Element with ID "cart-preview" not found.');
